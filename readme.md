@@ -17,7 +17,9 @@ make
 ./ghc -r mscode98/ghc
 ```
 
-Note: Use `-hs` to use HTTPS instead of SSH.
+#### Note: 
+- Use `-hs` to use HTTPS instead of SSH.
+- Run `make install` to install ghc system wide.
 
 ### Software use:
 
