@@ -19,7 +19,7 @@ make
 
 #### Note: 
 - Use `-hs` to use HTTPS instead of SSH.
-- Run `make install` to install ghc system wide.
+- Run `sudo make install` to install ghc system wide.
 
 ### Software use:
 
