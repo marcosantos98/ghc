@@ -25,10 +25,14 @@ std::string cmd(const char *cmd)
     return result;
 }
 
-void clone_repo(const char *repo, bool https)
+//fixme 24/02/14: dont hardcode the git host
+void clone_repo(const char *repo, bool https, bool shallow)
 {
     std::string command;
     command.append("git clone ");
+
+    if(shallow) command.append("--depth=1 ");
+
     if (https)
     {
         command.append("https://github.com/")
@@ -54,6 +58,10 @@ int main(int argc, char **argv)
         .default_value(false)
         .implicit_value(true)
         .help("Use https instead of ssh.");
+    program.add_argument("-s")
+        .default_value(false)
+        .implicit_value(true)
+        .help("Shallow clone (--depth=1).");
     program.add_argument("-r")
         .required()
         .help("user/repo");
@@ -70,5 +78,5 @@ int main(int argc, char **argv)
     }
 
     if (auto repo = program.present("-r"))
-        clone_repo(repo.value().c_str(), program.get<bool>("-hs"));
+        clone_repo(repo.value().c_str(), program.get<bool>("-hs"), program.get<bool>("-s"));
 }
